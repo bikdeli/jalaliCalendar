@@ -48,15 +48,15 @@ export const Utils = {
     return moment.jDaysInMonth(year, month);
   },
   compareDates: function(date1, date2) {
-    if (parseInt(date1.getDate()) !== parseInt(date2.getDate())) {
+    if (parseInt(date1.jDate()) !== parseInt(date2.jDate())) {
       return false;
     }
 
-    if (parseInt(date1.getMonth()) !== parseInt(date2.getMonth())) {
+    if (parseInt(date1.jMonth()) !== parseInt(date2.jMonth())) {
       return false;
     }
 
-    if (parseInt(date1.getFullYear()) !== parseInt(date2.getFullYear())) {
+    if (parseInt(date1.jYear()) !== parseInt(date2.jYear())) {
       return false;
     }
 

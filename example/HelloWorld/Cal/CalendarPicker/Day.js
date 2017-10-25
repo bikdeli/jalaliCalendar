@@ -22,9 +22,9 @@ export default function Day(props) {
     maxDate,
   } = props;
 
-  const thisDay = new Date(year, month, day);
-  const today = new Date();
-  today.setHours(0,0,0,0);
+  const thisDay = moment(`${year}/${month + 1}/${day}`, 'jYYYY/jM/jD');;
+  const today = moment();
+  //today.setHours(0,0,0,0);
 
   let dateOutOfRange = false;
   let daySelectedStyle = {};

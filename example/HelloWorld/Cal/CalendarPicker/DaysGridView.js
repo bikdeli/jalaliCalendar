@@ -38,8 +38,6 @@ export default function DaysGridView(props) {
   const guideArray = [ 0, 1, 2, 3, 4, 5, 6 ];
 
   function generateColumns(i) {
-    console.log(guideArray);
-
     const column = guideArray.map(index => {
       if (i === 0) { // for first row, let's start showing the days on the correct weekday
         if (index >= firstWeekDay) {

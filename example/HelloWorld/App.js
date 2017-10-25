@@ -39,7 +39,7 @@ export default class App extends Component<{}> {
 
   render() {
     const { selectedStartDate } = this.state;
-    const startDate = selectedStartDate ? selectedStartDate.toString() : '';
+    const startDate = selectedStartDate ? selectedStartDate.format('jYYYY/jM/jD [is] YYYY/M/D') : '';
 
     return (
       <View style={styles.container}>

@@ -100,7 +100,7 @@ export default class CalendarPicker extends Component {
       onDateChange,
     } = this.props;
 
-    const date = new Date(currentYear, currentMonth, day);
+    const date = moment(currentYear+'/'+(currentMonth+1)+'/'+(day), 'jYYYY/jM/jD');
 
     if (allowRangeSelection &&
         selectedStartDate &&
