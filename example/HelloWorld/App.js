@@ -12,7 +12,7 @@ import {
   View
 } from 'react-native';
 
-import JalaliCalendarPicker from './Cal';
+import JalaliCalendarPicker from 'react-native-jalali-calendar-picker';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -25,31 +25,44 @@ export default class App extends Component<{}> {
 
   constructor(props) {
     super(props);
+
     this.state = {
       selectedStartDate: null,
+      selectedEndDate: null,
     };
     this.onDateChange = this.onDateChange.bind(this);
   }
 
-  onDateChange(date) {
-    this.setState({
-      selectedStartDate: date,
-    });
+  onDateChange(date, type) {
+    if (type === 'END_DATE') {
+      this.setState({
+        selectedEndDate: date,
+      });
+    } else {
+      this.setState({
+        selectedStartDate: date,
+        selectedEndDate: null,
+      });
+    }
   }
 
   render() {
-    const { selectedStartDate } = this.state;
-    const startDate = selectedStartDate ? selectedStartDate.format('jYYYY/jM/jD [is] YYYY/M/D') : '';
+    const { selectedStartDate, selectedEndDate } = this.state;
+
+    const startDate  =  selectedStartDate ? selectedStartDate.format('jYYYY/jM/jD [is] YYYY/M/D') : '';
+    const endDate = selectedEndDate ? selectedEndDate.format('jYYYY/jM/jD [is] YYYY/M/D') : '';
 
     return (
       <View style={styles.container}>
 
         <JalaliCalendarPicker
           onDateChange={this.onDateChange}
+          allowRangeSelection={true}
         />
 
         <View>
-          <Text>SELECTED DATE:{ startDate }</Text>
+          <Text>SELECTED START DATE:{ startDate }</Text>
+          <Text>SELECTED END DATE:{ endDate }</Text>
         </View>
 
         <Text style={styles.welcome}>
