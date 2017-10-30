@@ -1,19 +1,28 @@
-# react-native-calendar-picker
+# react-native-jalali-calendar-picker
 
-[![npm version](https://badge.fury.io/js/react-native-calendar-picker.svg)](https://badge.fury.io/js/react-native-calendar-picker) [![npm](https://img.shields.io/npm/dm/localeval.svg)](https://www.npmjs.com/package/react-native-calendar-picker) [![Build Status](https://travis-ci.org/stephy/CalendarPicker.svg?branch=master)](https://travis-ci.org/stephy/CalendarPicker)
 
-This is a Calendar Picker Component for React Native
+This is the Jalali (and Farsi) version of "react-native-calendar-picker" (https://github.com/stephy/CalendarPicker), Calendar Picker Component for React Native
+
+I have tried to cast the `Date` object to `moment-jalali` (https://github.com/jalaali/moment-jalaali) but this is somehow ugly. 
+
+It was a 5-hour work and there are still many issues (i.e `minDate` and `maxDate` does not work properly and might raise error)
+
+Following features work at the moment:
+
+ - Date picker grid
+ - Single selection
+ - Multi selection
+ 
+ Please refer to the original author's README (https://github.com/stephy/CalendarPicker) for more options and examples.
 
 ![alt tag](https://raw.githubusercontent.com/stephy/CalendarPicker/master/assets/basic-react-native-calendar-picker.gif)
 
+
 To use the calendar you just need to:
 ```sh
-npm install --save react-native-calendar-picker
+npm install --save react-native-jalali-calendar-picker
 ```
 
-*Note: react-native-calendar-picker v5 is a complete re-write of the calendar. This calendar is now written using ES6 syntax. I kept most of the same functionalities and added support for date ranges.*
-
-If you need the old code I saved it on a branch <a href="https://github.com/stephy/CalendarPicker/tree/v4">v4</a>
 
 # How to use it
 
@@ -24,7 +33,7 @@ import {
   Text,
   View
 } from 'react-native';
-import CalendarPicker from 'react-native-calendar-picker';
+import JalaliCalendarPicker from 'react-native-jalali-calendar-picker';
 
 export default class App extends Component {
   constructor(props) {
@@ -42,7 +51,9 @@ export default class App extends Component {
   }
   render() {
     const { selectedStartDate } = this.state;
-    const startDate = selectedStartDate ? selectedStartDate.toString() : '';
+
+    const startDate = selectedStartDate ? selectedStartDate.format('jYYYY/jM/jD [is] YYYY/M/D') : '';
+
     return (
       <View style={styles.container}>
         <CalendarPicker
@@ -65,7 +76,7 @@ const styles = StyleSheet.create({
   },
 });
 ```
-## CalendarPicker Props
+## JalaliCalendarPicker Props
 | Prop | Type | Description |
 :------------ |:---------------| :-----|
 | **`weekdays`** | `Array` | Optional. List of week days. Eg. `['Mon', 'Tue', ...]` Must be 7 days |
@@ -96,10 +107,8 @@ Order of precedence:
 - defaultBackgroundColor => selectedDayColor
 - defaultTextStyles => textStyle => selectedDayTextColor
 
-# More Examples
+# Mutli select
 
-### Start from Monday, allowRangeSelection, Min and Max Dates and Styles Changes Example
-![alt tag](https://raw.githubusercontent.com/stephy/CalendarPicker/master/assets/default-react-native-calendar-picker.gif)
 ```js
 import React, { Component } from 'react';
 import {
@@ -107,7 +116,7 @@ import {
   Text,
   View
 } from 'react-native';
-import CalendarPicker from 'react-native-calendar-picker';
+import JalaliCalendarPicker from 'react-native-calendar-picker';
 
 export default class App extends Component {
   constructor(props) {
@@ -134,104 +143,16 @@ export default class App extends Component {
 
   render() {
     const { selectedStartDate, selectedEndDate } = this.state;
-    const minDate = new Date(); // Today
-    const maxDate = new Date(2017, 6, 3);
-    const startDate  =  selectedStartDate ? selectedStartDate.toString() : '';
-    const endDate = selectedEndDate ? selectedEndDate.toString() : '';
+    const startDate  =  selectedStartDate ? selectedStartDate.format('jYYYY/jM/jD [is] YYYY/M/D') : '';
+    const endDate = selectedEndDate ? selectedEndDate.format('jYYYY/jM/jD [is] YYYY/M/D') : '';
 
     return (
       <View style={styles.container}>
         <CalendarPicker
-          startFromMonday={true}
           allowRangeSelection={true}
-          minDate={minDate}
-          maxDate={maxDate}
           todayBackgroundColor="#f2e6ff"
           selectedDayColor="#7300e6"
           selectedDayTextColor="#FFFFFF"
-          onDateChange={this.onDateChange}
-        />
-
-        <View>
-          <Text>SELECTED START DATE:{ startDate }</Text>
-          <Text>SELECTED END DATE:{ endDate }</Text>
-        </View>
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFFFFF',
-    marginTop: 100,
-  },
-});
-```
-
-### Complex Example, Changing Fonts and Colors, Language and etc...
-
-![alt tag](https://github.com/stephy/CalendarPicker/blob/master/assets/react-native-calendar-picker-green-color-date-range.gif)
-
-```js
-import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
-import CalendarPicker from 'react-native-calendar-picker';
-
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedStartDate: null,
-      selectedEndDate: null,
-    };
-    this.onDateChange = this.onDateChange.bind(this);
-  }
-
-  onDateChange(date, type) {
-    if (type === 'END_DATE') {
-      this.setState({
-        selectedEndDate: date,
-      });
-    } else {
-      this.setState({
-        selectedStartDate: date,
-        selectedEndDate: null,
-      });
-    }
-  }
-
-  render() {
-    const { selectedStartDate, selectedEndDate } = this.state;
-    const minDate = new Date(); // Today
-    const maxDate = new Date(2017, 6, 3);
-    const startDate  =  selectedStartDate ? selectedStartDate.toString() : '';
-    const endDate = selectedEndDate ? selectedEndDate.toString() : '';
-
-    return (
-      <View style={styles.container}>
-        <CalendarPicker
-          startFromMonday={true}
-          allowRangeSelection={true}
-          minDate={minDate}
-          maxDate={maxDate}
-          weekdays={['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom']}
-          months={['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']}
-          previousTitle="Anterior"
-          nextTitle="Próximo"
-          todayBackgroundColor="#e6ffe6"
-          selectedDayColor="#66ff33"
-          selectedDayTextColor="#000000"
-          scaleFactor={375}
-          textStyle={{
-            fontFamily: 'Cochin',
-            color: '#000000',
-          }}
           onDateChange={this.onDateChange}
         />
 
@@ -257,34 +178,6 @@ const styles = StyleSheet.create({
 
 Open Issues. Submit PRs.
 
-# Special Thanks
-
-I would like to call out some contributors who have been helping with this project
-
-- [edvinerikson](https://github.com/edvinerikson)
-- [thomaswright](https://github.com/thomaswright)
-- [brentvatne](https://github.com/brentvatne)
-- [kesha-antonov](https://github.com/kesha-antonov)
-- [jthestupidkid](https://github.com/jthestupidkid)
-- [adamkrell](https://github.com/adamkrell)
-- [joshuapinter](https://github.com/joshuapinter)
-
-
-# Development
-
-```sh
-git clone git@github.com:stephy/CalendarPicker.git CalendarPicker
-npm install
-```
-
-In Package.json modify
-```sh
-"main": "./CalendarPicker",
-```
-to
-```sh
-"main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
-```
 
 #### Running on device
 ```sh
