@@ -15,7 +15,7 @@ Following features work at the moment:
  
  Please refer to the original author's README (https://github.com/stephy/CalendarPicker) for more options and examples.
 
-![alt tag](https://raw.githubusercontent.com/stephy/CalendarPicker/master/assets/basic-react-native-calendar-picker.gif)
+![alt tag](https://raw.githubusercontent.com/afshinm/JalaliCalendarPicker/master/jalaliPicker.png)
 
 
 To use the calendar you just need to:
