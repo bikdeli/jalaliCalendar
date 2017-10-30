@@ -22,8 +22,8 @@ export default function HeaderControls(props) {
   const MONTHS = months? months : Utils.MONTHS; // English Month Array
   // getMonth() call below will return the month number, we will use it as the
   // index for month array in english
-  const previous = previousTitle ? previousTitle : 'Previous';
-  const next = nextTitle ? nextTitle : 'Next';
+  const previous = previousTitle ? previousTitle : 'قبلی';
+  const next = nextTitle ? nextTitle : 'بعدی';
   const month = MONTHS[currentMonth];
   const year = currentYear;
 

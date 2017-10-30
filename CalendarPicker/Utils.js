@@ -5,31 +5,58 @@
  * Licensed under the terms of the MIT license. See LICENSE file in the project root for terms.
  */
 
+import moment from 'moment-jalaali';
+
 export const Utils = {
   START_DATE: 'START_DATE',
   END_DATE: 'END_DATE',
-  WEEKDAYS: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-  WEEKDAYS_MON: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+  WEEKDAYS: [
+    'شنبه',
+    'یکشنبه',
+    'دوشنبه',
+    'سه شنبه',
+    'چهارشنبه',
+    'پنج شنبه',
+    'جمعه'
+  ],
+  WEEKDAYS_MON: [
+    'دوشنبه',
+    'سه شنبه',
+    'چهارشنبه',
+    'پنج شنبه',
+    'جمعه',
+    'شنبه',
+    'یکشنبه',
+  ],
   MONTHS: [
-    'January', 'February', 'March', 'April', 'May', 'June', 'July',
-    'August', 'September', 'October', 'November', 'December'
+    'فروردین',
+    'اردیبهشت',
+    'خرداد',
+    'تیر',
+    'مرداد',
+    'شهریور',
+    'مهر',
+    'آبان',
+    'آذر',
+    'دی',
+    'بهمن',
+    'اسفند'
   ],
   MAX_ROWS: 7,
   MAX_COLUMNS: 7,
   getDaysInMonth: function(month, year) {
-    const lastDayOfMonth = new Date(year, month + 1, 0);
-    return lastDayOfMonth.getDate();
+    return moment.jDaysInMonth(year, month);
   },
   compareDates: function(date1, date2) {
-    if (parseInt(date1.getDate()) !== parseInt(date2.getDate())) {
+    if (parseInt(date1.jDate()) !== parseInt(date2.jDate())) {
       return false;
     }
 
-    if (parseInt(date1.getMonth()) !== parseInt(date2.getMonth())) {
+    if (parseInt(date1.jMonth()) !== parseInt(date2.jMonth())) {
       return false;
     }
 
-    if (parseInt(date1.getFullYear()) !== parseInt(date2.getFullYear())) {
+    if (parseInt(date1.jYear()) !== parseInt(date2.jYear())) {
       return false;
     }
 
@@ -42,4 +69,9 @@ export const Utils = {
 
     return false;
   },
+  // converts Jalali moment to timestamp
+  // i.e new Date().getTime()
+  getTime: function (jDate) {
+    return new Date(jDate.format('YYYY-M-D HH:mm:ss')).getTime();
+  }
 };

@@ -11,6 +11,7 @@ import HeaderControls from './HeaderControls';
 import Weekdays from './Weekdays';
 import DaysGridView from './DaysGridView';
 import Swiper from './Swiper';
+import moment from 'moment-jalaali';
 
 const SWIPE_LEFT = 'SWIPE_LEFT';
 const SWIPE_RIGHT = 'SWIPE_RIGHT';
@@ -39,7 +40,7 @@ export default class CalendarPicker extends Component {
   }
 
   static defaultProps = {
-    initialDate: new Date(),
+    initialDate: moment(),
     scaleFactor: 375,
   }
 
@@ -56,7 +57,7 @@ export default class CalendarPicker extends Component {
     }
 
     let newMonthYear = {}
-    if (nextProps.initialDate.getTime() !== this.props.initialDate.getTime()) {
+    if (Utils.getTime(nextProps.initialDate) !== Utils.getTime(this.props.initialDate)) {
       this.updateMonthYear(nextProps, {});
     }
 
@@ -81,8 +82,8 @@ export default class CalendarPicker extends Component {
 
   updateMonthYear(props) {
     return {
-      currentMonth: parseInt(props.initialDate.getMonth()),
-      currentYear: parseInt(props.initialDate.getFullYear()),
+      currentMonth: parseInt(props.initialDate.jMonth()),
+      currentYear: parseInt(props.initialDate.jYear()),
     };
   }
 
@@ -99,7 +100,7 @@ export default class CalendarPicker extends Component {
       onDateChange,
     } = this.props;
 
-    const date = new Date(currentYear, currentMonth, day);
+    const date = moment(currentYear+'/'+(currentMonth+1)+'/'+(day), 'jYYYY/jM/jD');
 
     if (allowRangeSelection &&
         selectedStartDate &&
