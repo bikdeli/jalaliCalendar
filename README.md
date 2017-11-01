@@ -56,7 +56,7 @@ export default class App extends Component {
 
     return (
       <View style={styles.container}>
-        <CalendarPicker
+        <JalaliCalendarPicker
           onDateChange={this.onDateChange}
         />
 
@@ -148,7 +148,7 @@ export default class App extends Component {
 
     return (
       <View style={styles.container}>
-        <CalendarPicker
+        <JalaliCalendarPicker
           allowRangeSelection={true}
           todayBackgroundColor="#f2e6ff"
           selectedDayColor="#7300e6"

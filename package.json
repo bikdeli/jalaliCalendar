@@ -1,6 +1,6 @@
 {
   "name": "react-native-jalali-calendar-picker",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Calendar Picker Component for React Native (Jalali)",
   "engines" : {
     "node" : ">=7.6.0"
