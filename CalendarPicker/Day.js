@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import { Utils } from './Utils';
 import moment from 'moment-jalaali';
+import PropTypes from 'prop-types';
 
 export default function Day(props) {
   const {

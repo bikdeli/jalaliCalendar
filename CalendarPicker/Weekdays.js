@@ -1,9 +1,10 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import {
   View,
   Text,
 } from 'react-native';
 import { Utils } from './Utils';
+import PropTypes from 'prop-types';
 
 export default function Weekdays(props) {
   const { styles, startFromMonday, weekdays, textStyle } = props;

@@ -1,10 +1,11 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import {
   View,
   Text,
 } from 'react-native';
 import { Utils } from './Utils';
 import Controls from './Controls';
+import PropTypes from 'prop-types';
 
 export default function HeaderControls(props) {
   const {

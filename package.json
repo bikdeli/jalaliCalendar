@@ -1,6 +1,6 @@
 {
   "name": "react-native-jalali-calendar-picker",
-  "version": "0.2.0",
+  "version": "0.2.3",
   "description": "Calendar Picker Component for React Native (Jalali)",
   "engines" : {
     "node" : ">=7.6.0"
@@ -14,7 +14,9 @@
     "uuid": "^3.0.1"
   },
   "peerDependencies": {
-    "babel-preset-expo": "^2.0.0"
+    "react": "~15.4.0",
+    "babel-preset-expo": "^2.0.0",
+    "react-native": "^0.42.3"
   },
   "main": "./CalendarPicker",
   "scripts": {
@@ -59,8 +61,8 @@
   ],
   "directories": {},
   "dependencies": {
-    "react-native": "^0.42.3",
     "expo": "^15.1.0",
+    "prop-types": "^15.6.0",
     "moment-jalaali": "^0.7.2"
   }
 }
