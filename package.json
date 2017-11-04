@@ -1,6 +1,6 @@
 {
   "name": "react-native-jalali-calendar-picker",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Calendar Picker Component for React Native (Jalali)",
   "engines" : {
     "node" : ">=7.6.0"
@@ -42,7 +42,10 @@
     "date",
     "picker",
     "day",
-    "picker"
+    "picker",
+    "jalali",
+    "persian",
+    "farsi"
   ],
   "author": {
     "name": "Afshin Mehrabani",
