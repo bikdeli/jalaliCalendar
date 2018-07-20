@@ -58,6 +58,7 @@ export default class CalendarPicker extends Component {
 
     let newMonthYear = {}
     if (Utils.getTime(nextProps.initialDate) !== Utils.getTime(this.props.initialDate)) {
+      console.log('nextProps')
       this.updateMonthYear(nextProps, {});
     }
 
@@ -138,8 +139,26 @@ export default class CalendarPicker extends Component {
       });
     }
   }
+  handleSetYear=(year)=>{
+    const { currentMonth, currentYear } = this.state;
 
+    console.log('handleSetYear')
+      this.setState({
+        currentMonth: parseInt(currentMonth), // setting month to January
+        currentYear: parseInt(year) , // increment year
+      });
+  }
+  handleSetMonth=(month)=>{
+    const { currentMonth, currentYear } = this.state;
+
+    console.log('handleSetMonth')
+    this.setState({
+      currentMonth: parseInt(month), // setting month to January
+      currentYear: parseInt(currentYear) , // increment year
+    });
+  }
   handleOnPressNext() {
+    // this.handleSetYear(1360)()
     const { currentMonth, currentYear } = this.state;
     const nextMonth = currentMonth + 1;
     // if nextMonth is greater than 11 it means the current month is December,
@@ -180,16 +199,28 @@ export default class CalendarPicker extends Component {
     const {
       allowRangeSelection,
       startFromMonday,
-      initialDate,
-      minDate,
-      maxDate,
+
+
       weekdays,
       months,
       previousTitle,
       nextTitle,
       textStyle,
     } = this.props;
-
+   let {minDate, maxDate,initialDate}=  this.props;
+    // set default time to min and max date
+    const now =new Date();
+    // console.log(initialDate)
+    // console.log(minDate)
+    // console.log(maxDate)
+    minDate = typeof minDate ==='undefined'?now:minDate
+    maxDate = typeof maxDate ==='undefined'?new Date(now.getFullYear()+10,now.getMonth(),now.getDay()):maxDate
+   /*Why this error happened ?  */
+    maxDate = typeof  maxDate==="number"?new Date(maxDate):maxDate
+    minDate = typeof  minDate==="number"?new Date(minDate):minDate
+    initialDate = typeof  initialDate==="number"?new Date(initialDate):initialDate
+    /*Why this error happened ? */
+    console.log('----------------JALALI-------------------')
     return (
       <Swiper
         onSwipe={(direction) => this.onSwipe(direction)}
@@ -203,10 +234,14 @@ export default class CalendarPicker extends Component {
             initialDate={initialDate}
             onPressPrevious={this.handleOnPressPrevious}
             onPressNext={this.handleOnPressNext}
+            handleSetYear={this.handleSetYear}
+            handleSetMonth={this.handleSetMonth}
             months={months}
             previousTitle={previousTitle}
             nextTitle={nextTitle}
             textStyle={textStyle}
+            minDate={minDate}
+            maxDate={maxDate}
           />
           <Weekdays
             styles={styles}
